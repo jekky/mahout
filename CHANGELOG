@@ -2,13 +2,23 @@ Mahout Change Log
 
 Release 1.0 - unreleased
 
+  MAHOUT-1445: Create an intro for item based recommender (Nick Martin via ssc)
+
+  MAHOUT-1509: Invalid URL in link from "quick start/basics" page (Nick Martin, smarthi)
+
   MAHOUT-1508: Performance problems with sparse matrices (ssc)
+
+  MAHOUT-1504: Enable/fix thetaSummer job in TrainNaiveBayesJob (Andrew Palumbo, smarthi)
+
+  MAHOUT-1503: TestNaiveBayesDriver fails in sequential mode (Andrew Palumbo, smarthi)
 
   MAHOUT-1501: ClusterOutputPostProcessorDriver has private default constructor (ssc)
 
   MAHOUT-1491: Spectral KMeans Clustering doesn't clean its /tmp dir and fails when seeing it again (smarthi)
 
   MAHOUT-1488: DisplaySpectralKMeans fails: examples/output/clusteredPoints/part-m-00000 does not exist (Saleem Ansari via smarthi)
+
+  MAHOUT-1483: Organize links in web site navigation bar (akm)
 
   MAHOUT-1482: Rework quickstart website (Jian Wang via ssc)
 
@@ -40,6 +50,8 @@ Release 1.0 - unreleased
 
   MAHOUT-1451: Cleaning up the examples for clustering on the website (Gaurav Misra via ssc)
 
+  MAHOUT-1450: Cleaning up clustering documentation on mahout website (Pavan Kumar)
+
   MAHOUT-1449: Update the Known Issues in Random Forests Page (Manoj Awasthi via ssc)
 
   MAHOUT-1448: In Random Forest, the training does not support multiple input files. The input dataset must be one single file. (Manoj Awasthi via ssc)
@@ -54,7 +66,7 @@ Release 1.0 - unreleased
 
   MAHOUT-1429: Parallelize YtransposeY in ImplicitFeedbackAlternatingLeastSquaresSolver (Adam Ilardi via ssc)
 
-  MAHOUT-1420: Add solr-recommender to examples
+  MAHOUT-1420: Add solr-recommender to examples (Pat Ferrel via akm)
 
   MAHOUT-1419: Random decision forest is excessively slow on numeric features (srowen)
 
