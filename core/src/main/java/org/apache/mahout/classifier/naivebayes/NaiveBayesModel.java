@@ -33,12 +33,11 @@ import org.apache.mahout.math.VectorWritable;
 import com.google.common.base.Preconditions;
 import com.google.common.io.Closeables;
 
-/** NaiveBayesModel holds the weight Matrix, the feature and label sums and the weight normalizer vectors.*/
+/** NaiveBayesModel holds the weight matrix, the feature and label sums and the weight normalizer vectors.*/
 public class NaiveBayesModel {
 
   private final Vector weightsPerLabel;
   private final Vector perlabelThetaNormalizer;
-  //  private final double minThetaNormalizer;
   private final Vector weightsPerFeature;
   private final Matrix weightsPerLabelAndFeature;
   private final float alphaI;
@@ -57,16 +56,15 @@ public class NaiveBayesModel {
     this.numFeatures = weightsPerFeature.getNumNondefaultElements();
     this.totalWeightSum = weightsPerLabel.zSum();
     this.alphaI = alphaI;
-//    this.minThetaNormalizer = thetaNormalizer.maxValue();
   }
 
   public double labelWeight(int label) {
     return weightsPerLabel.getQuick(label);
   }
 
-//  public double thetaNormalizer(int label) {
-//    return perlabelThetaNormalizer.get(label) / minThetaNormalizer;
-//  }
+  public double thetaNormalizer(int label) {
+    return perlabelThetaNormalizer.get(label); 
+  }
 
   public double featureWeight(int feature) {
     return weightsPerFeature.getQuick(feature);
@@ -148,18 +146,18 @@ public class NaiveBayesModel {
     Preconditions.checkNotNull(weightsPerLabel, "the number of labels has to be defined!");
     Preconditions.checkArgument(weightsPerLabel.getNumNondefaultElements() > 0,
         "the number of labels has to be greater than 0!");
-    Preconditions.checkArgument(perlabelThetaNormalizer != null, "the theta normalizers have to be defined");
-    // Preconditions.checkArgument(perlabelThetaNormalizer.getNumNondefaultElements() > 0,
-    //    "the number of theta normalizers has to be greater than 0!");
     Preconditions.checkNotNull(weightsPerFeature, "the feature sums have to be defined");
     Preconditions.checkArgument(weightsPerFeature.getNumNondefaultElements() > 0,
         "the feature sums have to be greater than 0!");
-    // Check if all thetas have same sign.
-    /*Iterator<Element> it = perlabelThetaNormalizer.iterateNonZero();
-    while (it.hasNext()) {
-      Element e = it.next();
-      Preconditions.checkArgument(Math.signum(e.get()) == Math.signum(minThetaNormalizer), e.get()
-          + "  " + minThetaNormalizer);
-    }*/
+    Preconditions.checkArgument(perlabelThetaNormalizer != null, "the theta normalizers have to be defined");
+    Preconditions.checkArgument(perlabelThetaNormalizer.getNumNondefaultElements() > 0,
+        "the number of theta normalizers has to be greater than 0!");    
+    Preconditions.checkArgument(Math.signum(perlabelThetaNormalizer.minValue()) 
+            == Math.signum(perlabelThetaNormalizer.maxValue()), 
+       "Theta normalizers do not all have the same sign");            
+    Preconditions.checkArgument(perlabelThetaNormalizer.getNumNonZeroElements() 
+            == perlabelThetaNormalizer.size(), 
+       "Theta normalizers can not have zero value.");
+    
   }
 }
